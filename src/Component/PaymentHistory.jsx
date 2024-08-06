@@ -1,109 +1,93 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 
-function PaymentHistory({token}){
+function PaymentHistory({ token }) {
+  const [allPayment, setAllPayment] = useState([]);
 
-     const [allPayment , setAllPayment] = useState([]);
+  const fetchAllPayments = async () => {
+    try {
+      const response = await fetch(
+        "https://ecomm-backend-aopz.onrender.com/api/v1/payment/fetchAllPayments",
+        {
+          method: "GET",
 
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-     const fetchAllPayments = async()=>{
-        
- try{
-
-    const response = await fetch( "https://ecomm-backend-aopz.onrender.com/api/v1/payment/fetchAllPayments", {
-        method: "GET",
-        
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-
-      });
-  
       const formattedResponse = await response.json();
 
-      if(formattedResponse.success){
+      if (formattedResponse.success) {
         setAllPayment(formattedResponse?.allPayments);
       }
+    } catch (error) {
+      console.log(error);
+      alert("internal server error , please try again");
+    }
+  };
 
- }catch(error){
- console.log(error);
- alert("internal server error , please try again")
- }    }
+  useEffect(() => {
+    fetchAllPayments();
+  }, []);
 
+  return (
+    <div className="w-full mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+      <h2 className="text-center text-2xl font-semibold text-gray-800 py-4 bg-gray-100">
+        Payment History
+      </h2>
 
-      useEffect(()=>{
- fetchAllPayments();
-      },[])
-
-
-    return (
-        <div className="w-full flex flex-col gap-10">
-
-        <h2 className="mx-auto text-white text-[34px] font-[600]">Payment History</h2>
-
-        {
-            allPayment.length > 0 ?(
-              
- 
-
-<div class="relative overflow-x-auto">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    userName
+      {allPayment.length > 0 ? (
+        <div className="overflow-x-auto">
+          <table className="w-full bg-[#ffffff">
+            <thead className="bg-gray-200 border-b-2 border-gray-300">
+              <tr>
+                <th className="p-4 text-left text-sm font-semibold text-gray-600">
+                  #
+                </th>
+                <th className="p-4 text-left text-sm font-semibold text-gray-600">
+                  USERNAME
+                </th>
+                <th className="p-4 text-left text-sm font-semibold text-gray-600">
+                  RAZORPAY PAYMENT ID
+                </th>
+                <th className="p-4 text-left text-sm font-semibold text-gray-600">
+                  RAZORPAY ORDER ID
                 </th>
                 {/* <th scope="col" class="px-6 py-3">
                     razorpaySignature
                 </th> */}
-                <th scope="col" class="px-6 py-3">
-                razorpay_payment_id
+              </tr>
+            </thead>
+            <tbody>
+              {allPayment.map((payment, index) => (
+                <tr className="border-b border-gray-200 hover:bg-gray-100">
+                  <td className="p-4 text-gray-700">{index + 1}</td>
+                  <td className="p-4 text-gray-700">
+                    {payment?.user?.firstName} {payment?.user?.lastName}
+                  </td>
+                  <td className="p-4 text-gray-700">
+                    {payment?.razorpay_payment_id}
+                  </td>
+                  <td className="p-4 text-gray-700">
+                    {payment?.razorpay_order_id}
+                  </td>
 
-                </th>
-                <th scope="col" class="px-6 py-3">
-                razorpay_order_id
-
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {
-                allPayment.map((payment)=>(
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {payment?.user?.firstName} {payment?.user?.lastName}
-                    </td>
-
-                    {/* <td class="px-6 py-4">
+                  {/* <td class="px-6 py-4">
                    {payment?.razorpay_signature}
                     </td> */}
-
-                    <td class="px-6 py-4">
-                    {payment?.razorpay_payment_id}
-
-                    </td>
-
-                    <td class="px-6 py-4">
-                    {payment?.razorpay_order_id}
-
-                    </td>
-                    
                 </tr>
-           
-                ))
-            }
-          
-        </tbody>
-    </table>
-
-</div>
-                ):(
-                <span className="text-white font-[600] mx-auto text-[3rem]">no payment left </span>
-            )
-        }
-                  
-
-
-              </div>
-    )
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <span className="text-white font-[600] mx-auto text-[3rem]">
+          no payment left{" "}
+        </span>
+      )}
+    </div>
+  );
 }
 export default PaymentHistory;
