@@ -10,16 +10,18 @@ import CreateSubCategory from "../Component/CreateSubCategory";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { IoMdHome } from "react-icons/io";
-import { FaUsers, FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { IoSearchSharp } from "react-icons/io5";
 import { MdKeyboardArrowRight, MdArrowForward } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Navbar from "../Component/Navbar";
+import AddOrders from "../Component/AddOrders";
+import ViewOrders from "../Component/ViewOrders";
 
 function Dashboard() {
   const navigate = useNavigate();
 
   const [openProduct, setOpenProduct] = useState(false);
+  const [openOrders, setOpenOrders] = useState(false);
   const [openCategory, setOpenCategory] = useState(false);
 
   const [selectedItem, setSelectedItem] = useState("dashboard");
@@ -101,29 +103,16 @@ function Dashboard() {
           </header>
 
           <div className="w-full h-auto bg-[#273a8a]">
-            <div className="flex flex-col ps-6 mb-3">
+            {/* <div className="flex flex-col ps-6 mb-3">
               <h3 className="text-lg font-[400] text-[#ffffff]">Username</h3>
               <p className="text-sm font-[400] text-[#ffffff]">
                 Trial Plan Store
               </p>
-            </div>
+            </div> */}
 
             {/* All Users */}
             <div className="h-full pt-2 overflow-y-auto bg-[#273a8a]">
               <ul className="">
-                <li onClick={() => setSelectedItem("users")}>
-                  <Link
-                    to="#"
-                    className="flex items-center ps-6 p-[8px] text-sm font-thin text-[#b7c6fe] hover:text-[#d7d6d9] bg-transparent hover:bg-[#3b51ab] group"
-                  >
-                    <FaUsers className="flex-shrink-0 w-5 h-5 transition duration-75 " />
-                    <span className="flex-1 ms-3 whitespace-nowrap">
-                      All Users
-                    </span>
-                    <FaArrowUpRightFromSquare />
-                  </Link>
-                </li>
-
                 <li onClick={() => setSelectedItem("dashboard")}>
                   <Link
                     to="#"
@@ -155,26 +144,66 @@ function Dashboard() {
 
           <div className="h-full py-4 overflow-y-auto bg-[#34313f]">
             <ul className="">
-              {/* Payment */}
+              {/* All Users */}
               <li
-                onClick={() => setSelectedItem("paymentHistory")}
+                onClick={() => setSelectedItem("users")}
                 className="text-sm font-[600]"
               >
                 <Link
                   to="#"
-                  className={`flex items-center pl-4 py-1 font-thin ${
-                    selectedItem === "paymentHistory"
-                      ? "text-white bg-[#2a2731]"
-                      : "text-[#d7d6d9] hover:bg-[#585466]"
-                  } group transition duration-75`}
+                  className="flex items-center pl-4 py-1 font-thin text-[#d7d6d9] hover:bg-[#585466] group"
                 >
-                  <span className="flex-1 p-2">Payment History</span>
-                  <MdKeyboardArrowRight class="flex-shrink-0 w-7 h-7 pr-2 transition-transform duration-200 transform group-hover:translate-x-1" />
+                  <span className="flex-1 p-2">All Users</span>
+                  <MdKeyboardArrowRight className="flex-shrink-0 w-7 h-7 pr-2 transition-transform duration-200 transform group-hover:translate-x-1" />
                 </Link>
               </li>
 
-              {/* products  */}
+              {/* Orders */}
+              <li className="text-sm font-[600]">
+                <Link
+                  onClick={() => setOpenOrders((prev) => !prev)}
+                  to="#"
+                  className="flex items-center pl-4 py-1 font-thin text-[#d7d6d9] hover:bg-[#585466] group"
+                >
+                  <span className="flex-1 p-2">Orders</span>
+                  <MdKeyboardArrowRight className="flex-shrink-0 w-7 h-7 pr-2 transition-transform duration-200 transform group-hover:translate-x-1" />
+                </Link>
+                {openOrders && (
+                  <ul className="font-thin">
+                    <li onClick={() => setSelectedItem("viewOrders")}>
+                      <Link
+                        to="#"
+                        className={`flex items-center pl-4 py-1 font-thin ${
+                          selectedItem === "viewOrders"
+                            ? "text-white bg-[#2a2731]"
+                            : "text-[#d7d6d9] hover:bg-[#585466]"
+                        }
+                        group transition duration-75`}
+                      >
+                        <MdArrowForward className="flex-shrink-0 ms-3 w-7 h-7 pr-2 transition-transform duration-200 transform group-hover:translate-x-1" />
+                        <span className="flex-1 p-[6px]">View Orders</span>
+                      </Link>
+                    </li>
 
+                    <li onClick={() => setSelectedItem("addOrders")}>
+                      <Link
+                        to="#"
+                        className={`flex items-center pl-4 py-1 font-thin ${
+                          selectedItem === "addOrders"
+                            ? "text-white bg-[#2a2731]"
+                            : "text-[#d7d6d9] hover:bg-[#585466]"
+                        }
+                        group transition duration-75`}
+                      >
+                        <MdArrowForward className="flex-shrink-0 ms-3 w-7 h-7 pr-2 transition-transform duration-200 transform group-hover:translate-x-1" />
+                        <span className="flex-1 p-[6px]">Add Orders</span>
+                      </Link>
+                    </li>
+                  </ul>
+                )}
+              </li>
+
+              {/* products  */}
               <li className="text-sm font-[600]">
                 <Link
                   onClick={() => setOpenProduct((prev) => !prev)}
@@ -215,6 +244,24 @@ function Dashboard() {
                     </li>
                   </ul>
                 )}
+              </li>
+
+              {/* Payment */}
+              <li
+                onClick={() => setSelectedItem("paymentHistory")}
+                className="text-sm font-[600]"
+              >
+                <Link
+                  to="#"
+                  className={`flex items-center pl-4 py-1 font-thin ${
+                    selectedItem === "paymentHistory"
+                      ? "text-white bg-[#2a2731]"
+                      : "text-[#d7d6d9] hover:bg-[#585466]"
+                  } group transition duration-75`}
+                >
+                  <span className="flex-1 p-2">Payment History</span>
+                  <MdKeyboardArrowRight class="flex-shrink-0 w-7 h-7 pr-2 transition-transform duration-200 transform group-hover:translate-x-1" />
+                </Link>
               </li>
 
               {/* category  */}
@@ -392,6 +439,12 @@ function Dashboard() {
               token={token}
               setSelectedItem={setSelectedItem}
             />
+          )}
+          {selectedItem === "addOrders" && (
+            <AddOrders setSelectedItem={setSelectedItem} />
+          )}
+          {selectedItem === "viewOrders" && (
+            <ViewOrders setSelectedItem={setSelectedItem} />
           )}
         </div>
       </div>

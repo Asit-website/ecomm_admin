@@ -218,7 +218,7 @@ function CreateProduct({
   return (
     <div className="bg-[#f8f9fa]">
       <div className="w-full mx-auto p-4 md:p-8">
-        <div className=" flex flex-col justify-center items-center space-y-2">
+        <div className="flex flex-col justify-center items-center space-y-2">
           <h2 className="text-2xl font-[400] text-gray-700 text-center pt-2">
             Product Information
           </h2>
