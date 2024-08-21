@@ -42,7 +42,8 @@ function CreateProduct({
 
   const fetchAllCategory = async () => {
     const response = await fetch(
-      "https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory",
+      // "https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory",
+      `http://localhost:4000/api/v1/showAllCategory`,
       {
         method: "GET",
         headers: {
@@ -98,7 +99,8 @@ function CreateProduct({
     try {
       try {
         const response = await fetch(
-          `https://ecomm-backend-aopz.onrender.com/api/v1/getProductById/${updateProductId}`,
+          // `https://ecomm-backend-aopz.onrender.com/api/v1/getProductById/${updateProductId}`,
+          `http://localhost:4000/api/v1/getProductById/${updateProductId}`,
           {
             method: "GET",
             headers: {
@@ -149,7 +151,8 @@ function CreateProduct({
       formToSendData.append("subCategoryId", formData.subCategory);
 
       const response = await fetch(
-        "https://ecomm-backend-aopz.onrender.com/api/v1/createProduct",
+        // "https://ecomm-backend-aopz.onrender.com/api/v1/createProduct",
+        `http://localhost:4000/api/v1/createProduct`,
         {
           method: "POST",
 
@@ -164,7 +167,7 @@ function CreateProduct({
       const formattedResponse = await response.json();
 
       if (formattedResponse.success) {
-        toast.success("successfuly created the product");
+        toast.success("Successfuly created the product");
         setSelectedItem("products");
       } else {
         toast.error(formattedResponse?.message);
@@ -188,7 +191,8 @@ function CreateProduct({
       formToSendData.append("subCategoryId", formData.subCategory);
 
       const response = await fetch(
-        `https://ecomm-backend-aopz.onrender.com/api/v1/updateProduct/${updateProductId}`,
+        // `https://ecomm-backend-aopz.onrender.com/api/v1/updateProduct/${updateProductId}`,
+        `http://localhost:4000/api/v1/updateProduct/${updateProductId}`,
         {
           method: "PUT",
 
@@ -203,7 +207,7 @@ function CreateProduct({
       const formattedResponse = await response.json();
 
       if (formattedResponse.success) {
-        toast.success("successfuly updated the product");
+        toast.success("Successfuly updated the product");
         setSelectedItem("products");
       } else {
         toast.error(formattedResponse?.message);
@@ -216,156 +220,195 @@ function CreateProduct({
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-6 bg-gray-800 rounded-lg shadow-lg">
-      <h2 className="text-3xl text-center text-white font-bold mb-8">
-        Add New Product
-      </h2>
-
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-
-          updateProductId !== null ? updateProductHandler() : submitHandler();
-        }}
-        className="space-y-6"
-      >
-        <div>
-          <label
-            htmlFor="title"
-            className="block text-sm font-medium text-gray-300"
-          >
-            Product title
-          </label>
-          <input
-            onChange={changeHandler}
-            type="text"
-            name="title"
-            value={formData.title}
-            id="title"
-            className="w-full mt-2 p-3 bg-gray-900 border border-gray-700 text-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
-            placeholder="Enter product title"
-            required
-          />
+    <div className="bg-[#f8f9fa]">
+      <div className="w-full mx-auto p-4 md:p-8">
+        <div className="flex flex-col justify-center items-center space-y-2">
+          <h2 className="text-2xl font-[400] text-gray-700 text-center pt-2">
+            Product Information
+          </h2>
+          <p className="text-md font-[400] text-gray-700 pb-2">
+            Information to help define a product.
+          </p>
         </div>
 
-        <div>
-          <label
-            htmlFor="description"
-            className="block text-sm font-medium text-gray-300"
+        <div className="mt-2 p-8 bg-white shadow-md">
+          <h1 className="text-2xl font-[400] text-gray-700 mb-6">
+            Basic Information
+          </h1>
+
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+
+              updateProductId !== null
+                ? updateProductHandler()
+                : submitHandler();
+            }}
           >
-            Product Description
-          </label>
-          <input
-            onChange={changeHandler}
-            type="text"
-            id="description"
-            value={formData.description}
-            name="description"
-            className="w-full mt-2 p-3 bg-gray-900 border border-gray-700 text-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
-            placeholder="Enter product description"
-            required
-          />
+            <div className="w-full md:flex md:flex-row justify-between">
+              <div className="md:flex-1 md:mr-2 mb-4">
+                <label
+                  htmlFor="title"
+                  className="block text-md font-[400] text-gray-700 mb-1"
+                >
+                  Product Title
+                </label>
+                <input
+                  onChange={changeHandler}
+                  type="text"
+                  name="title"
+                  value={formData.title}
+                  id="title"
+                  className="w-full p-2 text-gray-800 border border-gray-200 hover:border-gray-500 outline-none focus:border-blue-600 rounded-md"
+                  placeholder="Sample Product Title"
+                  required
+                />
+              </div>
+              <div className="md:flex-1 md:ml-2 mb-4">
+                <label
+                  htmlFor="price"
+                  className="block text-md font-[400] text-gray-700 mb-1"
+                >
+                  Product price
+                </label>
+                <input
+                  onChange={changeHandler}
+                  type="number"
+                  id="price"
+                  name="price"
+                  value={formData.price}
+                  className="w-full p-2 text-gray-800 border border-gray-200 hover:border-gray-500 outline-none focus:border-blue-600 rounded-md"
+                  placeholder="Enter Product Price"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="mb-4">
+              <label
+                htmlFor="description"
+                className="block text-md font-[400] text-gray-700 mb-1"
+              >
+                Product Description
+              </label>
+              <textarea
+                onChange={changeHandler}
+                type="text"
+                id="description"
+                value={formData.description}
+                name="description"
+                className="w-full p-2 text-gray-800 border border-gray-200 hover:border-gray-500 outline-none focus:border-blue-600 rounded-md"
+                placeholder="Enter Product Description"
+                required
+              />
+            </div>
+
+            {/* category */}
+            <div className="w-full md:flex md:flex-row justify-between">
+              <div className="md:flex-1 md:mr-2 mb-4">
+                <label
+                  htmlFor="category"
+                  className="block text-md font-[400] text-gray-700 mb-1"
+                >
+                  Choose a Category:
+                </label>
+
+                <select
+                  onChange={handleSelectChange}
+                  id="category"
+                  className="w-full p-2 text-gray-800 border border-gray-200 hover:border-gray-500 outline-none focus:border-blue-600 rounded-md"
+                >
+                  <option value="">Select Category</option>
+
+                  {allCategory?.length > 0 &&
+                    allCategory.map((item) => (
+                      <option key={item._id} value={item._id}>
+                        {item.title}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              {/* sub category */}
+              <div className="md:flex-1 md:ml-2 mb-4">
+                <label
+                  htmlFor="category"
+                  className="block text-md font-[400] text-gray-700 mb-1"
+                >
+                  Choose a Sub Category:
+                </label>
+
+                <select
+                  onChange={handleSubSelectChange}
+                  value={formData.subCategory}
+                  name="subCategory"
+                  id="category"
+                  className="w-full p-2 text-gray-800 border border-gray-200 hover:border-gray-500 outline-none focus:border-blue-600 rounded-md"
+                >
+                  <option value="">Select Sub Category</option>
+                  {chooseSubCat?.length > 0 &&
+                    chooseSubCat.map((item) => (
+                      <option key={item._id} value={item._id}>
+                        {item.title}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            </div>
+
+            {/* thumbnail */}
+
+            <div class="flex items-center justify-center w-full mb-4">
+              <label
+                for="dropzone-file"
+                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+              >
+                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                  <svg
+                    class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 16"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                    />
+                  </svg>
+                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span class="font-semibold">Click to upload</span> or drag
+                    and drop
+                  </p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">
+                    SVG, PNG, JPG or GIF (MAX. 800x400px)
+                  </p>
+                </div>
+                <input
+                  id="dropzone-file"
+                  type="file"
+                  class="hidden"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                />
+              </label>
+            </div>
+
+            {/* Button */}
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="px-8 py-2 text-white font-[500] bg-blue-600 hover:bg-blue-700 rounded-md border focus:border-blue-800"
+              >
+                {updateProductId !== null ? "Update Product" : "Add Product"}
+              </button>
+            </div>
+          </form>
         </div>
-
-        <div>
-          <label
-            htmlFor="price"
-            className="block text-sm font-medium text-gray-300"
-          >
-            Product price
-          </label>
-          <input
-            onChange={changeHandler}
-            type="number"
-            id="price"
-            name="price"
-            value={formData.price}
-            className="w-full mt-2 p-3 bg-gray-900 border border-gray-700 text-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
-            placeholder="Enter product price"
-            required
-          />
-        </div>
-
-        {/* category */}
-        <div>
-          <label
-            htmlFor="category"
-            className="block text-sm font-medium text-gray-300"
-          >
-            Choose a category:
-          </label>
-
-          <select
-            onChange={handleSelectChange}
-            id="category"
-            className="w-full mt-2 p-3 bg-gray-900 border border-gray-700 text-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
-          >
-            <option value="" selected disabled>
-              Select Category
-            </option>
-            {allCategory?.length > 0 &&
-              allCategory.map((item) => (
-                <option key={item._id} value={item._id}>
-                  {item.title}
-                </option>
-              ))}
-          </select>
-        </div>
-
-        {/* sub category */}
-        <div>
-          <label
-            htmlFor="category"
-            className="block text-sm font-medium text-gray-300"
-          >
-            Choose a Sub Category:
-          </label>
-
-          <select
-            onChange={handleSubSelectChange}
-            value={formData.subCategory}
-            name="subCategory"
-            id="category"
-            className="w-full mt-2 p-3 bg-gray-900 border border-gray-700 text-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
-          >
-            <option value="" selected disabled>
-              Select Sub Category
-            </option>
-            {chooseSubCat?.length > 0 &&
-              chooseSubCat.map((item) => (
-                <option key={item._id} value={item._id}>
-                  {item.title}
-                </option>
-              ))}
-          </select>
-        </div>
-
-        {/* thumbnail */}
-        <div>
-          <label
-            htmlFor="thumbnail"
-            className="block text-sm font-medium text-gray-300"
-          >
-            Choose Thumbnail:
-          </label>
-
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="w-full mt-2 p-3 bg-gray-900 border border-gray-700 text-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500"
-          />
-        </div>
-
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-500"
-          >
-            Add Product
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 }

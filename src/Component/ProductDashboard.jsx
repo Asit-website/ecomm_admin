@@ -22,7 +22,8 @@ function ProductDashboard({
   const fetchAllUsers = async () => {
     try {
       const response = await fetch(
-        `https://ecomm-backend-aopz.onrender.com/api/v1/getAllUsers`,
+        // `https://ecomm-backend-aopz.onrender.com/api/v1/getAllUsers`,
+        `http://localhost:4000/api/v1/getAllUsers`,
         {
           method: "GET",
           headers: {
@@ -45,7 +46,8 @@ function ProductDashboard({
   const fetchAllProduct = async () => {
     try {
       const response = await fetch(
-        `https://ecomm-backend-aopz.onrender.com/api/v1/totalProduct`,
+        // `https://ecomm-backend-aopz.onrender.com/api/v1/totalProduct`,
+        `http://localhost:4000/api/v1/totalProduct`,
         {
           method: "GET",
           headers: {
@@ -67,7 +69,8 @@ function ProductDashboard({
   const fetchAllCategory = async () => {
     try {
       const response = await fetch(
-        `https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory`,
+        // `https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory`,
+        `http://localhost:4000/api/v1/showAllCategory`,
         {
           method: "GET",
           headers: {
