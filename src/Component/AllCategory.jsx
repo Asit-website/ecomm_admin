@@ -19,7 +19,8 @@ function AllCategory({
   const fetchAllCategory = async () => {
     try {
       const response = await fetch(
-        `https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory`,
+        // `https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory`,
+        `http://localhost:4000/api/v1/showAllCategory`,
         {
           method: "GET",
           headers: {
@@ -59,7 +60,8 @@ function AllCategory({
     const toastId = toast.loading("Loading...");
     try {
       const response = await fetch(
-        `https://ecomm-backend-aopz.onrender.com/api/v1//deleteCategory/${categoryId}`,
+        // `https://ecomm-backend-aopz.onrender.com/api/v1//deleteCategory/${categoryId}`,
+        `http://localhost:4000/api/v1/deleteCategory/${categoryId}`,
         {
           method: "DELETE",
           headers: {
@@ -87,7 +89,8 @@ function AllCategory({
     const toastId = toast.loading("Loading...");
     try {
       const response = await fetch(
-        `https://ecomm-backend-aopz.onrender.com/api/v1//deleteSubCategory/${subCatId}`,
+        // `https://ecomm-backend-aopz.onrender.com/api/v1//deleteSubCategory/${subCatId}`,
+        `http://localhost:4000/api/v1/deleteSubCategory/${subCatId}`,
         {
           method: "DELETE",
           headers: {
@@ -99,7 +102,7 @@ function AllCategory({
       const formattedResponse = await response.json();
 
       if (formattedResponse.success) {
-        toast.success("Successfuly delted the subCategory");
+        toast.success("Successfuly deleted the subCategory");
         fetchAllCategory();
       } else {
         toast.error(formattedResponse?.message);
@@ -113,29 +116,41 @@ function AllCategory({
   };
 
   return (
-    <div className="w-full flex flex-col gap-10">
-      <h2 className="mx-auto text-white text-[34px] font-[600]">
-        All Category
-      </h2>
+    <>
+      <div className="w-full mx-auto bg-gray-100 overflow-hidden p-4 md:p-8">
+        <h2 className="text-center text-2xl font-[400] text-gray-700 pb-4">
+          All Category
+        </h2>
 
-      {allCategory?.length > 0 && (
-        <div className="flex gap-5 flex-wrap justify-center">
-          <div class="relative overflow-x-auto">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        {allCategory?.length > 0 && (
+          <div class="overflow-x-auto rounded-sm shadow-sm">
+            <table class="w-full bg-[#ffffff]">
+              <thead class="bg-gray-200 border-b-2 border-gray-300">
                 <tr>
-                  <th scope="col" class="px-8 py-3">
+                  <th
+                    scope="col"
+                    class="p-3 text-left text-sm font-[700] text-gray-800"
+                  >
                     Category Name
                   </th>
 
-                  <th scope="col" class="px-8 py-3">
+                  <th
+                    scope="col"
+                    class="p-3 text-left text-sm font-[700] text-gray-800"
+                  >
                     Category Image
                   </th>
 
-                  <th scope="col" class="px-8 py-3">
+                  <th
+                    scope="col"
+                    class="p-3 text-left text-sm font-[700] text-gray-800"
+                  >
                     Update
                   </th>
-                  <th scope="col" class="px-8 py-3">
+                  <th
+                    scope="col"
+                    class="p-3 text-left text-sm font-[700] text-gray-800"
+                  >
                     Delete
                   </th>
                 </tr>
@@ -146,23 +161,23 @@ function AllCategory({
                   <tr
                     key={index}
                     onClick={() => setSubCategory(category?.subCategory)}
-                    class=" cursor-pointer hover:bg-gray-900 transition-all duration-75 bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                    class="cursor-pointer border-b border-gray-300 hover:bg-gray-200 transition-all duration-75 bg-white"
                   >
                     <th
                       scope="row"
-                      class="px-8 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-left"
                     >
                       {category?.title}
                     </th>
 
-                    <td class="px-8 py-4">
+                    <td class="p-4">
                       <img
                         src={category?.images}
-                        className="max-w-[100px] max-h-[50px] mx-auto"
-                        alt=""
+                        className="max-w-[100px] max-h-[50px]"
+                        alt="category-img"
                       />
                     </td>
-                    <td class="px-8 py-4">
+                    <td class="p-4">
                       <button
                         type="button"
                         onClick={() => {
@@ -172,16 +187,16 @@ function AllCategory({
                           );
                           setSelectedItem("createCategory");
                         }}
-                        className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                        className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                       >
                         Update
                       </button>
                     </td>
-                    <td class="px-8 py-4 ">
+                    <td class="p-4">
                       <button
                         onClick={() => deleteCategory(category?._id)}
                         type="button"
-                        className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                        className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                       >
                         Delete
                       </button>
@@ -191,92 +206,103 @@ function AllCategory({
               </tbody>
             </table>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* sub category start  */}
+        {/* sub category start  */}
+        <div className="mt-10">
+          <h2 className="text-center text-2xl font-[400] text-gray-700 pb-4">
+            Sub Category{" "}
+          </h2>
 
-      <h2 className="mx-auto text-white text-[34px] font-[600]">
-        Sub Category{" "}
-      </h2>
-
-      {subCategory?.length > 0 && (
-        <div className="flex gap-5 flex-wrap justify-center">
-          <div class="relative overflow-x-auto">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  <th scope="col" class="px-8 py-3">
-                    Sub Category Name
-                  </th>
-
-                  <th scope="col" class="px-8 py-3">
-                    Sub Category Image
-                  </th>
-
-                  <th scope="col" class="px-8 py-3">
-                    Update
-                  </th>
-                  <th scope="col" class="px-8 py-3">
-                    Delete
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {subCategory.map((subCat, index) => (
-                  <tr
-                    key={index}
-                    class="bg-white border-b  dark:bg-gray-800 dark:border-gray-700"
-                  >
+          {subCategory?.length > 0 && (
+            <div className="overflow-x-auto rounded-sm shadow-sm">
+              <table class="w-full bg-[#ffffff]">
+                <thead class="bg-gray-200 border-b-2 border-gray-300">
+                  <tr>
                     <th
-                      scope="row"
-                      class="px-8 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      scope="col"
+                      class="p-3 text-left text-sm font-[700] text-gray-800"
                     >
-                      {subCat?.title}
+                      Sub Category Name
                     </th>
 
-                    <td class="px-8 py-4">
-                      <img
-                        src={subCat?.images}
-                        className="max-w-[100px] max-h-[50px] mx-auto"
-                        alt=""
-                      />
-                    </td>
+                    <th
+                      scope="col"
+                      class="p-3 text-left text-sm font-[700] text-gray-800"
+                    >
+                      Sub Category Image
+                    </th>
 
-                    <td class="px-8 py-4">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          sessionStorage.setItem(
-                            "ecommAdmin_subCategoryId",
-                            subCat?._id
-                          );
-                          setSelectedItem("createSubCategory");
-                        }}
-                        className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                      >
-                        Update
-                      </button>
-                    </td>
-
-                    <td class="px-8 py-4 ">
-                      <button
-                        type="button"
-                        onClick={() => deleteSubCategory(subCat._id)}
-                        className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                      >
-                        Delete
-                      </button>
-                    </td>
+                    <th
+                      scope="col"
+                      class="p-3 text-left text-sm font-[700] text-gray-800"
+                    >
+                      Update
+                    </th>
+                    <th
+                      scope="col"
+                      class="p-3 text-left text-sm font-[700] text-gray-800"
+                    >
+                      Delete
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+
+                <tbody>
+                  {subCategory.map((subCat, index) => (
+                    <tr
+                      key={index}
+                      class="border-b border-gray-300 hover:bg-gray-200 transition-all duration-75 bg-white"
+                    >
+                      <th
+                        scope="row"
+                        class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-left"
+                      >
+                        {subCat?.title}
+                      </th>
+
+                      <td class="p-4">
+                        <img
+                          src={subCat?.images}
+                          className="max-w-[100px] max-h-[50px]"
+                          alt=""
+                        />
+                      </td>
+
+                      <td class="p-4">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            sessionStorage.setItem(
+                              "ecommAdmin_subCategoryId",
+                              subCat?._id
+                            );
+                            setSelectedItem("createSubCategory");
+                          }}
+                          className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                        >
+                          Update
+                        </button>
+                      </td>
+
+                      <td class="p-4">
+                        <button
+                          type="button"
+                          onClick={() => deleteSubCategory(subCat._id)}
+                          className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-md text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 }
 

@@ -15,7 +15,8 @@ function AllUsers({
   const fetchAllUsers = async () => {
     try {
       const response = await fetch(
-        `https://ecomm-backend-aopz.onrender.com/api/v1/getAllUsers`,
+        // `https://ecomm-backend-aopz.onrender.com/api/v1/getAllUsers`,
+        `http://localhost:4000/api/v1/getAllUsers`,
         {
           method: "GET",
           headers: {
@@ -61,16 +62,16 @@ function AllUsers({
         <table className="w-full bg-[#ffffff]">
           <thead className="bg-gray-200 border-b-2 border-gray-300">
             <tr>
-              <th className="p-3 text-left text-sm font-[400] text-gray-600">
+              <th className="p-3 text-left text-sm font-[600] text-gray-800">
                 #
               </th>
-              <th className="p-3 text-left text-sm font-[400] text-gray-600">
+              <th className="p-3 text-left text-sm font-[600] text-gray-800">
                 Name
               </th>
-              <th className="p-3 text-left text-sm font-[400] text-gray-600">
+              <th className="p-3 text-left text-sm font-[600] text-gray-800">
                 Contact Number
               </th>
-              <th className="p-3 text-left text-sm font-[400] text-gray-600">
+              <th className="p-3 text-left text-sm font-[600] text-gray-800">
                 Email Address
               </th>
             </tr>

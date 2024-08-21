@@ -42,7 +42,8 @@ function CreateProduct({
 
   const fetchAllCategory = async () => {
     const response = await fetch(
-      "https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory",
+      // "https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory",
+      `http://localhost:4000/api/v1/showAllCategory`,
       {
         method: "GET",
         headers: {
@@ -98,7 +99,8 @@ function CreateProduct({
     try {
       try {
         const response = await fetch(
-          `https://ecomm-backend-aopz.onrender.com/api/v1/getProductById/${updateProductId}`,
+          // `https://ecomm-backend-aopz.onrender.com/api/v1/getProductById/${updateProductId}`,
+          `http://localhost:4000/api/v1/getProductById/${updateProductId}`,
           {
             method: "GET",
             headers: {
@@ -149,7 +151,8 @@ function CreateProduct({
       formToSendData.append("subCategoryId", formData.subCategory);
 
       const response = await fetch(
-        "https://ecomm-backend-aopz.onrender.com/api/v1/createProduct",
+        // "https://ecomm-backend-aopz.onrender.com/api/v1/createProduct",
+        `http://localhost:4000/api/v1/createProduct`,
         {
           method: "POST",
 
@@ -164,7 +167,7 @@ function CreateProduct({
       const formattedResponse = await response.json();
 
       if (formattedResponse.success) {
-        toast.success("successfuly created the product");
+        toast.success("Successfuly created the product");
         setSelectedItem("products");
       } else {
         toast.error(formattedResponse?.message);
@@ -188,7 +191,8 @@ function CreateProduct({
       formToSendData.append("subCategoryId", formData.subCategory);
 
       const response = await fetch(
-        `https://ecomm-backend-aopz.onrender.com/api/v1/updateProduct/${updateProductId}`,
+        // `https://ecomm-backend-aopz.onrender.com/api/v1/updateProduct/${updateProductId}`,
+        `http://localhost:4000/api/v1/updateProduct/${updateProductId}`,
         {
           method: "PUT",
 
@@ -203,7 +207,7 @@ function CreateProduct({
       const formattedResponse = await response.json();
 
       if (formattedResponse.success) {
-        toast.success("successfuly updated the product");
+        toast.success("Successfuly updated the product");
         setSelectedItem("products");
       } else {
         toast.error(formattedResponse?.message);
@@ -315,9 +319,7 @@ function CreateProduct({
                   id="category"
                   className="w-full p-2 text-gray-800 border border-gray-200 hover:border-gray-500 outline-none focus:border-blue-600 rounded-md"
                 >
-                  <option value="" selected disabled>
-                    Select Category
-                  </option>
+                  <option value="">Select Category</option>
 
                   {allCategory?.length > 0 &&
                     allCategory.map((item) => (
@@ -343,9 +345,7 @@ function CreateProduct({
                   id="category"
                   className="w-full p-2 text-gray-800 border border-gray-200 hover:border-gray-500 outline-none focus:border-blue-600 rounded-md"
                 >
-                  <option value="" selected disabled>
-                    Select Sub Category
-                  </option>
+                  <option value="">Select Sub Category</option>
                   {chooseSubCat?.length > 0 &&
                     chooseSubCat.map((item) => (
                       <option key={item._id} value={item._id}>
@@ -397,25 +397,13 @@ function CreateProduct({
               </label>
             </div>
 
-            {/* <div className="">
-              <label
-                htmlFor="thumbnail"
-                className="block text-md font-[400] text-gray-700 mb-1"
-              ></label>
-
-              <input
-                type="file"
-                className="w-full p-2 text-gray-800 border border-gray-200 hover:border-gray-500 outline-none focus:border-blue-600 rounded-md"
-              />
-            </div> */}
-
             {/* Button */}
             <div className="flex justify-center">
               <button
                 type="submit"
                 className="px-8 py-2 text-white font-[500] bg-blue-600 hover:bg-blue-700 rounded-md border focus:border-blue-800"
               >
-                Add Product
+                {updateProductId !== null ? "Update Product" : "Add Product"}
               </button>
             </div>
           </form>

@@ -13,9 +13,9 @@ import { IoMdHome } from "react-icons/io";
 import { IoSearchSharp } from "react-icons/io5";
 import { MdKeyboardArrowRight, MdArrowForward } from "react-icons/md";
 import { Link } from "react-router-dom";
-import Navbar from "../Component/Navbar";
-import AddOrders from "../Component/AddOrders";
-import ViewOrders from "../Component/ViewOrders";
+import Navbar from "../Component/Navbar/Navbar";
+import AddOrders from "../Component/Orders/AddOrders";
+import ViewOrders from "../Component/Orders/ViewOrders";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ function Dashboard() {
   return (
     <>
       <Navbar />
-      <div className="w-full min-h-[100vh] lg:mt-16">
+      <div className="w-full min-h-[100vh] lg:mt-16 border-red-500">
         <button
           data-drawer-target="default-sidebar"
           data-drawer-toggle="default-sidebar"
@@ -103,14 +103,6 @@ function Dashboard() {
           </header>
 
           <div className="w-full h-auto bg-[#273a8a]">
-            {/* <div className="flex flex-col ps-6 mb-3">
-              <h3 className="text-lg font-[400] text-[#ffffff]">Username</h3>
-              <p className="text-sm font-[400] text-[#ffffff]">
-                Trial Plan Store
-              </p>
-            </div> */}
-
-            {/* All Users */}
             <div className="h-full pt-2 overflow-y-auto bg-[#273a8a]">
               <ul className="">
                 <li onClick={() => setSelectedItem("dashboard")}>
