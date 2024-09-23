@@ -42,8 +42,8 @@ function CreateProduct({
 
   const fetchAllCategory = async () => {
     const response = await fetch(
-      // "https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory",
-      `http://localhost:4000/api/v1/showAllCategory`,
+      "https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory",
+      // `http://localhost:4000/api/v1/showAllCategory`,
       {
         method: "GET",
         headers: {
@@ -99,8 +99,8 @@ function CreateProduct({
     try {
       try {
         const response = await fetch(
-          // `https://ecomm-backend-aopz.onrender.com/api/v1/getProductById/${updateProductId}`,
-          `http://localhost:4000/api/v1/getProductById/${updateProductId}`,
+          `https://ecomm-backend-aopz.onrender.com/api/v1/getProductById/${updateProductId}`,
+          // `http://localhost:4000/api/v1/getProductById/${updateProductId}`,
           {
             method: "GET",
             headers: {
@@ -151,8 +151,8 @@ function CreateProduct({
       formToSendData.append("subCategoryId", formData.subCategory);
 
       const response = await fetch(
-        // "https://ecomm-backend-aopz.onrender.com/api/v1/createProduct",
-        `http://localhost:4000/api/v1/createProduct`,
+        "https://ecomm-backend-aopz.onrender.com/api/v1/createProduct",
+        // `http://localhost:4000/api/v1/createProduct`,
         {
           method: "POST",
 
@@ -191,8 +191,8 @@ function CreateProduct({
       formToSendData.append("subCategoryId", formData.subCategory);
 
       const response = await fetch(
-        // `https://ecomm-backend-aopz.onrender.com/api/v1/updateProduct/${updateProductId}`,
-        `http://localhost:4000/api/v1/updateProduct/${updateProductId}`,
+        `https://ecomm-backend-aopz.onrender.com/api/v1/updateProduct/${updateProductId}`,
+        // `http://localhost:4000/api/v1/updateProduct/${updateProductId}`,
         {
           method: "PUT",
 

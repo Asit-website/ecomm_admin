@@ -15,8 +15,8 @@ function AllUsers({
   const fetchAllUsers = async () => {
     try {
       const response = await fetch(
-        // `https://ecomm-backend-aopz.onrender.com/api/v1/getAllUsers`,
-        `http://localhost:4000/api/v1/getAllUsers`,
+        `https://ecomm-backend-aopz.onrender.com/api/v1/getAllUsers`,
+        // `http://localhost:4000/api/v1/getAllUsers`,
         {
           method: "GET",
           headers: {

@@ -60,7 +60,7 @@ function CreateCategory({
       formToSendData.append("thumbnail", formData.thumbnail);
 
       const response = await axios.post(
-        "http://localhost:4000/api/v1/createCategory",
+        "https://ecomm-backend-aopz.onrender.com/api/v1/createCategory",
         formToSendData,
 
         {

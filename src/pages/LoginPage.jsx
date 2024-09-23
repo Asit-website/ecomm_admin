@@ -22,8 +22,8 @@ function LoginPage() {
     e.preventDefault();
 
     const response = await fetch(
-      // "https://ecomm-backend-aopz.onrender.com/api/v1/adminLogin",
-      "http://localhost:4000/api/v1/adminLogin",
+      "https://ecomm-backend-aopz.onrender.com/api/v1/adminLogin",
+      // "http://localhost:4000/api/v1/adminLogin",
       {
         method: "POST",
         headers: {

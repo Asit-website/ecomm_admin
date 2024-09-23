@@ -39,8 +39,8 @@ function CreateSubCategory({
   const fetchAllCategory = async () => {
     try {
       const response = await fetch(
-        // `https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory`,
-        `http://localhost:4000/api/v1/showAllCategory`,
+        `https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory`,
+        // `http://localhost:4000/api/v1/showAllCategory`,
         {
           method: "GET",
           headers: {
@@ -70,8 +70,8 @@ function CreateSubCategory({
       formToSendData.append("categoryId", formData.category);
 
       const response = await fetch(
-        // "https://ecomm-backend-aopz.onrender.com/api/v1/createSubCategory",
-        "http://localhost:4000/api/v1/createSubCategory",
+        "https://ecomm-backend-aopz.onrender.com/api/v1/createSubCategory",
+        // "http://localhost:4000/api/v1/createSubCategory",
         {
           method: "POST",
           headers: {
@@ -106,8 +106,8 @@ function CreateSubCategory({
       formToSendData.append("category", formData.category);
 
       const response = await fetch(
-        // `https://ecomm-backend-aopz.onrender.com/api/v1/updateSubCategory/${updateSubCategoryId}`,
-        `http://localhost:4000/api/v1/updateSubCategory/${updateSubCategoryId}`,
+        `https://ecomm-backend-aopz.onrender.com/api/v1/updateSubCategory/${updateSubCategoryId}`,
+        // `http://localhost:4000/api/v1/updateSubCategory/${updateSubCategoryId}`,
         {
           method: "PUT",
 
@@ -158,8 +158,8 @@ function CreateSubCategory({
   const fetchSubCategoryDetailById = async () => {
     try {
       const response = await fetch(
-        // `https://ecomm-backend-aopz.onrender.com/api/v1/subCategoryPageDetails/${updateSubCategoryId}`,
-        `http://localhost:4000/api/v1/subCategoryPageDetails/${updateSubCategoryId}`,
+        `https://ecomm-backend-aopz.onrender.com/api/v1/subCategoryPageDetails/${updateSubCategoryId}`,
+        // `http://localhost:4000/api/v1/subCategoryPageDetails/${updateSubCategoryId}`,
         {
           method: "GET",
           headers: {

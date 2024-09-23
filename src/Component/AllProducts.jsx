@@ -40,8 +40,8 @@ function AllProducts({
   const fetchAllCategory = async (e) => {
     try {
       const response = await fetch(
-        // "https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory",
-        `http://localhost:4000/api/v1/showAllCategory`,
+        "https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory",
+        // `http://localhost:4000/api/v1/showAllCategory`,
         {
           method: "GET",
           headers: {
@@ -95,8 +95,8 @@ function AllProducts({
     const toastId = toast.loading("Loading...");
     try {
       const response = await fetch(
-        // `https://ecomm-backend-aopz.onrender.com/api/v1/deleteProduct/${id}`,
-        `http://localhost:4000/api/v1/deleteProduct/${id}`,
+        `https://ecomm-backend-aopz.onrender.com/api/v1/deleteProduct/${id}`,
+        // `http://localhost:4000/api/v1/deleteProduct/${id}`,
         {
           method: "DELETE",
           headers: {

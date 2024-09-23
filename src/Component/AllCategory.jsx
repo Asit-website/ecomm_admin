@@ -19,8 +19,8 @@ function AllCategory({
   const fetchAllCategory = async () => {
     try {
       const response = await fetch(
-        // `https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory`,
-        `http://localhost:4000/api/v1/showAllCategory`,
+        `https://ecomm-backend-aopz.onrender.com/api/v1/showAllCategory`,
+        // `http://localhost:4000/api/v1/showAllCategory`,
         {
           method: "GET",
           headers: {
@@ -60,8 +60,8 @@ function AllCategory({
     const toastId = toast.loading("Loading...");
     try {
       const response = await fetch(
-        // `https://ecomm-backend-aopz.onrender.com/api/v1//deleteCategory/${categoryId}`,
-        `http://localhost:4000/api/v1/deleteCategory/${categoryId}`,
+        `https://ecomm-backend-aopz.onrender.com/api/v1//deleteCategory/${categoryId}`,
+        // `http://localhost:4000/api/v1/deleteCategory/${categoryId}`,
         {
           method: "DELETE",
           headers: {
@@ -89,8 +89,8 @@ function AllCategory({
     const toastId = toast.loading("Loading...");
     try {
       const response = await fetch(
-        // `https://ecomm-backend-aopz.onrender.com/api/v1//deleteSubCategory/${subCatId}`,
-        `http://localhost:4000/api/v1/deleteSubCategory/${subCatId}`,
+        `https://ecomm-backend-aopz.onrender.com/api/v1//deleteSubCategory/${subCatId}`,
+        // `http://localhost:4000/api/v1/deleteSubCategory/${subCatId}`,
         {
           method: "DELETE",
           headers: {
